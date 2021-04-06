@@ -14,10 +14,10 @@ import java.sql.Timestamp;
 @Data
 @Builder
 @Accessors(chain = true)
-@TableName("sm_member_info")
+@TableName("sm_user_info")
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberInfo implements Serializable {
+public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = -2822047271579732890L;
     /**
@@ -26,45 +26,30 @@ public class MemberInfo implements Serializable {
     @TableId(type = IdType.AUTO)
     private String id;
     /**
-     * VIP编号
+     * 用户名
      */
-    @TableField("code")
-    private String code;
+    @TableField("user_name")
+    private String userName;
     /**
-     * 姓名
+     * 密码
      */
-    @TableField("name")
-    private String name;
+    @TableField("pass_word")
+    private String passWord;
     /**
-     * 性别
+     * 昵称
      */
-    @TableField("sex")
-    private String sex;
+    @TableField("nike_name")
+    private String nikeName;
     /**
-     * 年龄
+     * 角色ID
      */
-    @TableField("age")
-    private String age;
+    @TableField("role_id")
+    private Date roleId;
     /**
-     * 出生日期
+     * 是否授权：0 否 ，1 是
      */
-    @TableField("birthday")
-    private Date birthday;
-    /**
-     * 联系方式
-     */
-    @TableField("link_way")
-    private String linkWay;
-    /**
-     * 会员级别
-     */
-    @TableField("level")
-    private String level;
-    /**
-     * 常住地址
-     */
-    @TableField("address")
-    private String address;
+    @TableField("is_auth")
+    private String isAuth;
     /**
      * 创建时间
      */
@@ -79,10 +64,10 @@ public class MemberInfo implements Serializable {
      * 是否删除：N 否 ，Y 是
      */
     @TableField("is_del")
-    private String isDel;
+    private int isDel;
     /**
      *关联附件ID
      */
-    @TableField("c_Uuid")
-    private String cUuid;
+    @TableField("attach_id")
+    private String attachId;
 }

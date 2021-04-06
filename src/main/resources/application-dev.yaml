@@ -15,4 +15,4 @@ spring:
 logging:
   level:
     root: info
-    com.example.xiaochun: info
+    com.example.xiaochun: debug
