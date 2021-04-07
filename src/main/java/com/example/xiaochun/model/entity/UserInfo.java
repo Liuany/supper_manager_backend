@@ -19,11 +19,12 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class UserInfo implements Serializable {
 
-    private static final long serialVersionUID = -2822047271579732890L;
+    private static final long serialVersionUID = 660839296303936447L;
+
     /**
      * 主键
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
     /**
      * 用户名
@@ -53,7 +54,7 @@ public class UserInfo implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @TableField(value = "create_time")
     private Timestamp createTime;
     /**
      * 更新时间
