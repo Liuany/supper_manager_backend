@@ -29,10 +29,10 @@ public class JwtUtil {
         return jwt; //jwt前面一般都会加Bearer
     }
 
+
     public static HttpServletRequest validateTokenAndAddUserIdToHeader(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
-        if (token != null) {
-            // parse the token.
+        if (null != token) {
             try {
                 Map<String, Object> body = Jwts.parser()
                         .setSigningKey(SECRET)
@@ -41,15 +41,15 @@ public class JwtUtil {
                 return new CustomHttpServletRequest(request, body);
             } catch (Exception e) {
                 logger.info(e.getMessage());
-                throw new TokenValidationException(e.getMessage());
+                throw  new TokenValidationException(e.getMessage());
             }
         } else {
-            throw new TokenValidationException("Missing token");
+            throw  new TokenValidationException("Missing Token");
         }
     }
 
-    public static class CustomHttpServletRequest extends HttpServletRequestWrapper {
-        private Map<String, String> claims;
+    public static class CustomHttpServletRequest extends  HttpServletRequestWrapper {
+        private  Map<String,String> claims;
 
         public CustomHttpServletRequest(HttpServletRequest request, Map<String, ?> claims) {
             super(request);
@@ -58,17 +58,16 @@ public class JwtUtil {
         }
 
         @Override
-        public Enumeration<String> getHeaders(String name) {
-            if (claims != null && claims.containsKey(name)) {
+        public Enumeration<String> getHeaders(String name){
+            if (null != claims && claims.containsKey(name)) {
                 return Collections.enumeration(Arrays.asList(claims.get(name)));
             }
             return super.getHeaders(name);
         }
-
     }
 
     static class TokenValidationException extends RuntimeException {
-        public TokenValidationException(String msg) {
+        public  TokenValidationException(String msg) {
             super(msg);
         }
     }

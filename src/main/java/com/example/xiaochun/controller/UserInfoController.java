@@ -48,7 +48,7 @@ public class UserInfoController extends BaseController  {
     @RequestMapping(value = "info", method = RequestMethod.GET)
     public ApiResult<UserInfo> getUser(@RequestHeader(value = USER_NAME) String userName) {
         UserInfo userInfo = userInfoService.getUserByUserName(userName);
-        return null;
+        return ApiResult.success(userInfo);
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
