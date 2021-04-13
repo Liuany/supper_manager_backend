@@ -41,7 +41,7 @@ public class Menu implements Serializable {
      * 是否父节点
      */
     @TableField("is_parent")
-    private int isParent;
+    private String isParent;
     /**
      * 父节点ID
      */

@@ -1,9 +1,11 @@
 package com.example.xiaochun.controller.sys;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.xiaochun.common.api.ApiResult;
 import com.example.xiaochun.controller.BaseController;
 import com.example.xiaochun.model.dto.LoginDTO;
+import com.example.xiaochun.model.entity.UserInfo;
 import com.example.xiaochun.model.entity.sys.Menu;
 import com.example.xiaochun.model.vo.MemberInfoVo;
 import com.example.xiaochun.service.sys.MenuService;
@@ -38,11 +40,23 @@ public class MenuController extends BaseController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ApiResult<Map<String, Object>> save(@Valid @RequestBody Menu menu){
-        boolean result = menuService.save(menu);
+        boolean result = menuService.saveOrUpdate(menu);
         if (result) {
             return ApiResult.success();
         }else {
             return ApiResult.failed("新增失败");
         }
+    }
+
+    @GetMapping("/getByPid")
+    public ApiResult<List<Menu>> getByPid (@RequestParam(value = "pid") String pid) {
+        List<Menu> list = menuService.selectByPid(pid);
+        return ApiResult.success(list,"查询成功");
+    }
+
+    @RequestMapping(value = "/delById", method = RequestMethod.DELETE)
+    public ApiResult<Integer> delById (@RequestParam(value = "id") String id) {
+        int count = menuService.delById(id);
+        return ApiResult.success(count,"删除成功");
     }
 }

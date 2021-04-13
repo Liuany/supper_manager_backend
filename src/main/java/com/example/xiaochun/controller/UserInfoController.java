@@ -45,7 +45,7 @@ public class UserInfoController extends BaseController  {
         return ApiResult.success(map, "登录成功");
     }
 
-    @RequestMapping(value = "info", method = RequestMethod.GET)
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
     public ApiResult<UserInfo> getUser(@RequestHeader(value = USER_NAME) String userName) {
         UserInfo userInfo = userInfoService.getUserByUserName(userName);
         return ApiResult.success(userInfo);
