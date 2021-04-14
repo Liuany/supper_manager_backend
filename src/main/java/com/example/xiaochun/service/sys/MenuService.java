@@ -31,4 +31,6 @@ public interface MenuService extends IService<Menu> {
      * @return
      */
     int delById(String id);
+
+    Page<Menu> searchMenuByPage(Page<Menu> page, Menu menu);
 }

@@ -1,20 +1,14 @@
 package com.example.xiaochun.controller.sys;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.xiaochun.common.api.ApiResult;
 import com.example.xiaochun.controller.BaseController;
-import com.example.xiaochun.model.dto.LoginDTO;
-import com.example.xiaochun.model.entity.UserInfo;
 import com.example.xiaochun.model.entity.sys.Menu;
-import com.example.xiaochun.model.vo.MemberInfoVo;
 import com.example.xiaochun.service.sys.MenuService;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,5 +52,13 @@ public class MenuController extends BaseController {
     public ApiResult<Integer> delById (@RequestParam(value = "id") String id) {
         int count = menuService.delById(id);
         return ApiResult.success(count,"删除成功");
+    }
+
+    @RequestMapping(value = "/searchMenuByPage", method = RequestMethod.POST)
+    public ApiResult<Page<Menu>> searchMenuByPage (@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo,
+                                                   @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                                                   @Valid @RequestBody Menu menu) {
+        Page<Menu> list = menuService.searchMenuByPage(new Page<>(pageNo, pageSize), menu);
+        return ApiResult.success(list,"查询成功");
     }
 }
