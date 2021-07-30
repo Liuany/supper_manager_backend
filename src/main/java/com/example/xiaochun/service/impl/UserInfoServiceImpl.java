@@ -54,6 +54,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo>
             }
             token = JwtUtil.generateToken(dto.getUserName());
         } catch (Exception e) {
+            e.printStackTrace();
             log.warn("用户不存在或密码验证失败=======>{" + dto.getUserName() + "}");
         }
         return token;
