@@ -66,7 +66,7 @@ public class DailyIncome {
     private double weChatIncome;
 
     /**
-     * 券减
+     * 券减免
      */
     @TableField("ticket_reduce")
     private double ticketReduce;
